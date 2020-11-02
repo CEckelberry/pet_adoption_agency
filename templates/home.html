@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col mb-4">
+            <h1 class="display-1">Pets</h1>
+        </div>
+    </div>    
+    <div class="row row-cols-1 row-cols-md-3 m3">
+                {% for pet in pets %}
+                <div class="col mb-4">
+                    <div class="card h-80">
+
+                        <!--Card image-->
+                        <div class="view overlay">
+                        <img class="card-img-top" src="{{pet.photo_url}}"
+                            alt="{{pet.species}}">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                        </div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">{{pet.name}}</h4>
+                        <!--Text-->
+                        <p class="card-text text-truncate">{{pet.notes}}</p>
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                        {% if pet.available%}
+                            <p class="text-success font-weight-bolder">Available</p>
+                        {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                    <!-- Card -->
+                {% endfor %}
+        </div>
+            <form action="/pets/new">
+                <button class="btn btn-default" type="submit">Add Pet</button>
+            </form>
+</div>
+{% endblock %}
