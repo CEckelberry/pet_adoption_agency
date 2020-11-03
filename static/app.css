@@ -1,8 +1,8 @@
 .card-img-top {
-    max-height: 300px;
-    min-height: 250px;
-    object-fit: cover;
-
+	max-height: 300px;
+	min-height: 250px;
+	object-fit: cover;
+}
 h1 {
 	display: inline-flex;
 	text-align: center;
