@@ -62,4 +62,4 @@ def show_edit_pet(pet_id):
 
         return redirect("/")
     else:
-        return render_template("pet_detail.html", form=form)
+        return render_template("pet_detail.html", form=form, pet=pet)
