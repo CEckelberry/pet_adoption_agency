@@ -13,16 +13,17 @@
             {% endfor %}
         </div>
     </div>    
-    <div class="row row-cols-1 m3">
-        <form id="snack-add-form" method="POST">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+        <form id="snack-add-form" class="border border-light p-5" action="/add "method="POST">
             {{ form.hidden_tag() }} <!--add type=hidden form fields -->
           
             {% for field in form
                    if field.widget.input_type != 'hidden' %}
-          
+            
               <p>
                 {{ field.label }}
-                {{ field }}
+                {{ field(class_="form-control") }}
           
                 {% for error in field.errors %}
                   {{ error }}
@@ -31,7 +32,8 @@
           
             {% endfor %}
           
-            <button type="submit">Submit</button>
+            <button class="btn btn-info my-4 btn-block" type="submit">Submit</button>
           </form>
+        </div>
     </div>
 {% endblock %}

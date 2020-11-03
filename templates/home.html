@@ -32,7 +32,9 @@
                         <!--Text-->
                         <p class="card-text text-truncate">{{pet.notes}}</p>
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <button type="button" class="btn btn-light-blue btn-md">Read more</button>
+                        <form action="/{{pet.id}}">
+                            <button type="submit" class="btn btn-light-blue btn-md">Read more</button>
+                        </form>
                         {% if pet.available%}
                             <p class="text-success font-weight-bolder">Available</p>
                         {% endif %}
@@ -43,7 +45,7 @@
                     <!-- Card -->
                 {% endfor %}
         </div>
-            <form action="/pets/new">
+            <form action="/add">
                 <button class="btn btn-default" type="submit">Add Pet</button>
             </form>
 </div>

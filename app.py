@@ -10,6 +10,7 @@ app.config["SECRET_KEY"] = "oh-so-secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgres:///adopt"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
@@ -33,6 +34,32 @@ def add_pet():
         photo_url = form.photo_url.data
         age = form.age.data
         notes = form.notes.data
+
+        pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes)
+        db.session.add(pet)
+        db.session.commit()
         return redirect("/")
     else:
         return render_template("pet_add_form.html", form=form)
+
+
+@app.route("/<pet_id>", methods=["GET", "POST"])
+def show_edit_pet(pet_id):
+    """View pet details and edit form if necessary"""
+    pet = Pet.query.get_or_404(pet_id)
+    form = AddPetForm(obj=pet)
+    # species = db.session.query(Pet.species)
+    # form.species.choices = species
+
+    if form.validate_on_submit():
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+
+        db.session.commit()
+
+        return redirect("/")
+    else:
+        return render_template("pet_detail.html", form=form)

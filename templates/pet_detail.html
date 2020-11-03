@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Details{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col mb-4">
+            <h1 class="display-1">Edit Pet Form</h1>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+        <form id="snack-add-form" class="border border-light p-5" action="/add "method="POST">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                <p>
+                  {{ field.label }}
+                  {{ field(class_="form-control") }}
+                  {% for err in field.errors %}
+                  {{err}}
+                  {% endfor %}
+                </p>
+                {% endfor %}
+            <button class="btn btn-info my-4 btn-block" type="submit">Save</button>
+            <button class="btn btn-info-outline my-4 btn-block" href="/" type="submit">Cancel</button>
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
