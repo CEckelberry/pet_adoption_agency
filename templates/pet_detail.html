@@ -9,7 +9,7 @@
         <div class="col-md-6 offset-md-3">
             <h1 class="display-1">Pet Details</h1>
                 <h2>{{pet.name}}</h2>
-                <img src="{{pet.photo_url}}" alt="{{pet.species}}">
+                <img src="{{pet.photo_url}}" alt="{{pet.species}}" class="img-fluid">
                 <h4 class="font-weight-bold">Age: {{pet.age}}</h4>
                 <h4 class="font-weight-bold">Notes:</h4>
                 <p>{{pet.notes}}</p>
@@ -24,7 +24,7 @@
     </div>    
     <div class="row">
         <div class="col-md-6 offset-md-3">
-        <form id="snack-add-form" class="border border-light p-5" action="/add "method="POST">
+        <form id="snack-add-form" class="border border-light p-5" action="/{{pet.id}}" method="POST">
                 {{ form.hidden_tag() }}
                 {% for field in form if field.widget.input_type != 'hidden' %}
                 <p>
@@ -35,9 +35,9 @@
                   {% endfor %}
                 </p>
                 {% endfor %}
-            <button class="btn btn-info my-4 btn-block" type="submit">Save</button>
-            <button class="btn btn-info-outline my-4 btn-block" href="/" type="submit">Cancel</button>
-          </form>
+            <button class="btn btn-info my-2 btn-block" type="submit">Save</button>
+            <a href="/" class="btn btn-info-outline my-2 btn-block">Cancel</a>
+        </form>
         </div>
     </div>
 </div>

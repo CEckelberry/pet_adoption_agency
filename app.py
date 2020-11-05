@@ -48,8 +48,6 @@ def show_edit_pet(pet_id):
     """View pet details and edit form if necessary"""
     pet = Pet.query.get_or_404(pet_id)
     form = AddPetForm(obj=pet)
-    # species = db.session.query(Pet.species)
-    # form.species.choices = species
 
     if form.validate_on_submit():
         pet.name = form.name.data
@@ -60,6 +58,6 @@ def show_edit_pet(pet_id):
 
         db.session.commit()
 
-        return redirect("/")
+        return redirect(f"/{pet_id}")
     else:
         return render_template("pet_detail.html", form=form, pet=pet)
